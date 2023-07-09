@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="description" content="Plan your Diablo 4 character using this build calculator!">
+	<title>Diablo 4 Build Calculator</title>
+	<link href="favicon-32x32.png" rel="icon" type="image/png" sizes="32x32">
+	<link href="favicon-16x16.png" rel="icon" type="image/png" sizes="16x16">
+	<link href="favicon.ico" rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link rel="preload" href="https://fonts.gstatic.com/s/homenaje/v16/FwZY7-Q-xVAi_l-6Le6H6Mk.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Homenaje" as="style">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Homenaje" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.7.0/css/flag-icons.min.css" type="text/css">
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<link rel="modulepreload" href="data/barbarian.js">
+	<link rel="modulepreload" href="data/druid.js">
+	<link rel="modulepreload" href="data/necromancer.js">
+	<link rel="modulepreload" href="data/rogue.js">
+	<link rel="modulepreload" href="data/sorcerer.js">
+	<link rel="modulepreload" href="data/paragon.js">
+	<link rel="modulepreload" href="data/codex-of-power.js">
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.17/interact.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js"></script>
+</head>
+<body>
+	<div id="fadeOverlay" class="disabled"></div>
+	<div id="detailsWindow" class="disabled">
+		<div id="detailsWindowHeader"><span id="detailsWindowTitle">Details</span><img id="detailsWindowToggle" src="images/collapse.svg"></div>
+		<div id="detailsWindowContents"></div>
+	</div>
+	<div id="canvasContainer"></div>
+	<div id="header">
+		<h1><a href="#" target="_blank">Diablo IV Build Calculator</a><div id="versionLabel" class="disabled"></div></h1>
+		<h2 class="disabled"><span id="className"></span><span id="pointsLabel"></span><span id="errorLabel"></span></h2>
+	</div>
+	<div id="floatLeft">
+		<select name="localeSelector" id="localeSelector" class="disabled">
+			<option value="deDE">Deutsch&nbsp;[deDE]</option>
+			<option value="enUS">English&nbsp;[enUS]</option>
+			<option value="esES">Español&nbsp;[esES]</option>
+			<option value="esMX">Español&nbsp;[esMX]</option>
+			<option value="frFR">Français&nbsp;[frFR]</option>
+			<option value="itIT">Italiano&nbsp;[itIT]</option>
+			<option value="jaJP">日本語&nbsp;[jaJP]</option>
+			<option value="koKR">한국어&nbsp;[koKR]</option>
+			<option value="plPL">Polski&nbsp;[plPL]</option>
+			<option value="ptBR">Português&nbsp;[ptBR]</option>
+			<option value="ruRU">Русский&nbsp;[ruRU]</option>
+			<option value="trTR">Türkçe&nbsp;[trTR]</option>
+			<option value="zhCN">简体中文&nbsp;[zhCN]</option>
+			<option value="zhTW">繁體中文&nbsp;[zhTW]</option>
+		</select>
+	</div>
+	<div id="flexContainer">
+		<span id="classSelectBox" class="disabled">
+			<span id="barbarianSelect">[Barbarian]</span>
+			<span id="druidSelect">[Druid]</span>
+			<span id="necromancerSelect">[Necromancer]</span>
+			<span id="rogueSelect">[Rogue]</span>
+			<span id="sorcererSelect">[Sorcerer]</span>
+		</span>
+		<span id="modalBox" class="disabled"></span>
+	</div>
+	<div id="extraFooter">
+		<div id="extraInfo" class="disabled">
+			<a href="./database/" target="_blank">Click here if you're looking for datamined information.</a>
+		</div>
+		<div id="extraButtons1" class="disabled">
+			<select id="classSelector">
+				<option value="none">None</option>
+				<option value="barbarian">Barbarian</option>
+				<option value="druid">Druid</option>
+				<option value="necromancer">Necromancer</option>
+				<option value="rogue">Rogue</option>
+				<option value="sorcerer">Sorcerer</option>
+			</select>
+			<select id="groupSelector" class="disabled"></select>
+			<input id="searchInput" type="text" autocomplete="off" placeholder="Search.." class="disabled">
+		</div>
+		<div id="extraButtons2" class="disabled">
+			<button id="menuButton" type="button">Open Menu</button>
+			<button id="resetButton" type="button">Reset</button>
+			<button id="saveButton" type="button">Save</button>
+			<button id="reloadButton" type="button">Reload</button>
+			<button id="shareButton" type="button">Share URL</button>
+			<button id="databaseButton" type="button" onclick="window.open('./database/')">Open DB</button>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="footerText">Diablo IV &copy; 2023 <a href="https://diablo4.blizzard.com" target="_blank">Blizzard Entertainment</a>. Website by <a href="https://github.com/lothrik" target="_blank">Lothrik</a>. <a href="https://github.com/lothrik/diablo4-build-calc" target="_blank">Source Code</a>. <a href="https://patreon.com/lothrik" target="_blank">Patreon</a>.</div>
+	</div>
+	<script defer src="main.js" type="module"></script>
+</body>
+</html>

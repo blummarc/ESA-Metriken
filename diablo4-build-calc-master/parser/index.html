@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Diablo 4 JSON Parser</title>
+	<link href="../favicon-32x32.png" rel="icon" type="image/png" sizes="32x32">
+	<link href="../favicon-16x16.png" rel="icon" type="image/png" sizes="16x16">
+	<link href="../favicon.ico" rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48">
+	<link href="parser.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css">
+	<link rel="modulepreload" href="node-history.js">
+	<link rel="modulepreload" href="node-values.js">
+	<link rel="modulepreload" href="necromancer-minions.js">
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+	<div id="root">
+		<h1>JSON Parser</h1>
+		<div>
+			<button id="parseToFile">Run Parser + Download Files</button>
+			<button id="parseToConsole">Run Parser + Log to Console</button>
+		</div>
+		<h3>Debug Output:</h3>
+		<textarea id="debugOutput" disabled></textarea>
+	</div>
+	<script defer src="parser.js" type="module"></script>
+</body>
+</html>

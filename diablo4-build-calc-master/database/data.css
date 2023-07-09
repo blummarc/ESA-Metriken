@@ -1,0 +1,75 @@
+::-webkit-scrollbar {
+	color: #aba499;
+	background-color: #202324;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #454a4d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #575e62;
+}
+
+::-webkit-scrollbar-thumb:active {
+	background-color: #484e51;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: #181a1b;
+}
+
+body, .json-container {
+	background-color: #181a1b!important;
+	color: #eee!important;
+	font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important;
+}
+
+#root {
+	padding: 10px;
+	text-align: center;
+}
+
+.line {
+	display: block!important;
+	word-break: break-word;
+	text-align: justify;
+	text-align-last: left;
+}
+
+.line div {
+	display: inline!important;
+}
+
+.hidden {
+	display: none!important;
+}
+
+.json-key {
+	color: #8eecaa!important;
+}
+
+.json-size, .json-separator {
+	color: #eee!important;
+}
+
+.json-number {
+	color: #65b4fb!important;
+}
+
+.json-boolean {
+	color: #65b4fb!important;
+}
+
+.json-string {
+	color: #91c4f5!important;
+}
+
+.fa-caret-down {
+	border-color: #eee transparent!important;
+}
+
+.fa-caret-right {
+	border-color: transparent transparent transparent #eee!important;
+	margin: 0 2px;
+}
